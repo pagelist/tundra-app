@@ -1,0 +1,12 @@
+@import 'reset.css';
+
+:root {
+  --global-gutter: clamp(1.375rem, 1.2rem + 0.89vw, 2rem);
+}
+
+.wrapper {
+  margin-inline: auto;
+  width: clamp(16rem, 95vw, 85rem);
+  padding-inline: var(--global-gutter);
+  position: relative;
+}

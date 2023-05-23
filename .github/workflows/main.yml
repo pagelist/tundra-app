@@ -1,0 +1,32 @@
+name: Validate and Build
+
+on:
+  pull_request:
+    branches: [master]
+  push:
+    branches: [main, master, develop, release/**, bugfix/**, hotfix/**]
+  workflow_dispatch:
+
+jobs:
+  run:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        command: [validate, build]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Create/restore cache for node_modules
+        uses: actions/cache@v3
+        id: node_modules-cache
+        with:
+          path: '**/node_modules'
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+
+      - name: Install dependencies
+        if: steps.node_modules-cache.outputs.cache-hit != 'true'
+        run: yarn install --frozen-lockfile
+
+      - name: Run command
+        run: yarn ${{ matrix.command }}
