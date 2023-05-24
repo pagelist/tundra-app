@@ -8,11 +8,11 @@ export default function App() {
   return (
     <>
       <header className="wrapper">
-        <h1>Hello World: I love Potatoes!</h1>
+        <h1>Hello World!</h1>
         <form method="post" onSubmit={handleFormSubmit}>
           <input
             type="text"
-            placeholder="Filter by title,companies,experties..."
+            placeholder="Filter by ..."
           />
           <label>
             <input type="checkbox" value="fulltime" /> Full Time Only
